@@ -1,7 +1,13 @@
 html {
   font-family: ui-sans-serif, system-ui, sans-serif;
+  padding: 24px;
 }
 
 * {
   box-sizing: border-box;
+}
+
+button {
+  border: none;
+  background-color: transparent;
 }

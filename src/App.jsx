@@ -1,6 +1,7 @@
 import Card from "./components/Card";
 import Button from "./components/Button";
 import Input from "./components/Input";
+import Accordion from "./components/Accordion";
 import "./App.css";
 import { useState } from "react";
 
@@ -53,6 +54,15 @@ function App() {
         setValue={setAddress}
         value={address}
       />
+      <Accordion title="Education">
+        <Input
+          label="Full name:"
+          type="text"
+          placeholder="Valeria Blagodatskaja"
+          setValue={setFullName}
+          value={fullName}
+        />
+      </Accordion>
     </div>
   );
 }
