@@ -1,0 +1,74 @@
+.resume {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.name {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  padding: 36px 24px;
+  align-items: center;
+  gap: 32px;
+}
+
+.personal-info-container {
+  display: flex;
+  gap: 30px;
+}
+
+.svg-preview {
+  fill: white;
+  width: 16px;
+}
+
+.svg-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.heading {
+  font-weight: 700;
+  padding: 8px 0px 8px 12px;
+  border-radius: 4px;
+  background-color: lightgrey;
+}
+
+.education-job-container {
+  padding: 40px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.school-details-container,
+.job-details-container {
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.description {
+  font-size: 14px;
+}
+
+.bold-text {
+  font-weight: 700;
+}
+
+.small-text {
+  font-size: 14px;
+}
