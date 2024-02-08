@@ -43,8 +43,18 @@ function App() {
 
   const [selectedCompany, setSelectedCompany] = useState(null);
 
+  const [schoolButtons, setSchoolButtons] = useState(
+    educationInfo.map((education) => education.school)
+  );
+
+  const [companyButtons, setCompanyButtons] = useState(
+    experienceInfo.map((experience) => experience.company)
+  );
+
   const showSchoolDetails = (schoolName) => {
-    const foundSchool = educationInfo.find((edu) => edu.school === schoolName);
+    const foundSchool = educationInfo.find(
+      (education) => education.school === schoolName
+    );
     if (foundSchool) {
       setSelectedSchool(foundSchool);
       setSchool(foundSchool.school);
@@ -58,7 +68,7 @@ function App() {
 
   const showCompanyDetails = (companyName) => {
     const foundCompany = experienceInfo.find(
-      (exp) => exp.company === companyName
+      (experience) => experience.company === companyName
     );
     if (foundCompany) {
       setSelectedCompany(foundCompany);
@@ -81,7 +91,20 @@ function App() {
         endDate,
         location,
       };
-      setEducationInfo((prevData) => [...prevData, newData]);
+
+      if (selectedSchool) {
+        const updatedEducationInfo = educationInfo.map((education) =>
+          education.school === selectedSchool.school ? newData : education
+        );
+
+        setEducationInfo(updatedEducationInfo);
+        setSchoolButtons(
+          updatedEducationInfo.map((education) => education.school)
+        );
+      } else {
+        setEducationInfo((prevData) => [...prevData, newData]);
+        setSchoolButtons([...schoolButtons, school]);
+      }
       setEducationVisible(false);
     } else if (category === "experience") {
       const newData = {
@@ -92,7 +115,19 @@ function App() {
         jobLocation,
         description,
       };
-      setExperienceInfo((prevData) => [...prevData, newData]);
+      if (selectedCompany) {
+        const updatedExperienceInfo = experienceInfo.map((experience) =>
+          experience.company === selectedCompany.company ? newData : experience
+        );
+
+        setExperienceInfo(updatedExperienceInfo);
+        setCompanyButtons(
+          updatedExperienceInfo.map((experience) => experience.company)
+        );
+      } else {
+        setExperienceInfo((prevData) => [...prevData, newData]);
+        setCompanyButtons([...companyButtons, company]);
+      }
       setExperienceVisible(false);
     }
   };
@@ -100,7 +135,7 @@ function App() {
   const handleDelete = (category, selectedItem) => {
     if (category === "education") {
       const updatedEducationInfo = educationInfo.filter(
-        (edu) => edu.school !== selectedItem.school
+        (education) => education.school !== selectedItem.school
       );
       setEducationInfo(updatedEducationInfo);
       setSelectedSchool(null);
