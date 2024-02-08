@@ -4,4 +4,12 @@
   border: none;
   outline-color: black;
   border-radius: 5px;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+label {
+  font-size: 14px;
 }
