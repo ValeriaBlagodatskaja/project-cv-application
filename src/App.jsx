@@ -15,14 +15,14 @@ function App() {
 
   const [school, setSchool] = useState("Best School");
   const [degree, setDegree] = useState("bakalaurus");
-  const [startDate, setStartDate] = useState("02.2023");
-  const [endDate, setEndDate] = useState("02.2024");
+  const [startDate, setStartDate] = useState("2018-05");
+  const [endDate, setEndDate] = useState("2020-11");
   const [location, setLocation] = useState("Tallinn, Estonia");
 
   const [company, setCompany] = useState("Microsoft");
   const [positionTitle, setPositionTitle] = useState("Front-end Developer");
-  const [startJobDate, setStartJobDate] = useState("06.2022");
-  const [endJobDate, setEndJobDate] = useState("01.2024");
+  const [startJobDate, setStartJobDate] = useState("2021-07");
+  const [endJobDate, setEndJobDate] = useState("2023-10");
   const [jobLocation, setJobLocation] = useState("New York, USA");
   const [description, setDescription] = useState(
     "Developing new product features based on business requirements"

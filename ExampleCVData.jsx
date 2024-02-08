@@ -9,15 +9,15 @@ const exampleCVData = {
     {
       school: "University",
       degree: "bakalaurus",
-      startDate: "02.2020",
-      endDate: "01.2022",
+      startDate: "2020-12",
+      endDate: "2021-06",
       location: "Tallinn, Estonia",
     },
     {
       school: "Best School",
       degree: "bakalaurus",
-      startDate: "02.2023",
-      endDate: "01.2024",
+      startDate: "2018-05",
+      endDate: "2020-11",
       location: "Tallinn, Estonia",
     },
   ],
@@ -25,8 +25,8 @@ const exampleCVData = {
     {
       company: "Microsoft",
       positionTitle: "Front-end Developer",
-      startJobDate: "02.2024",
-      endJobDate: "03.2025",
+      startJobDate: "2021-07",
+      endJobDate: "2023-10",
       jobLocation: "New York, USA",
       description:
         "Developing new product features based on business requirements",
@@ -34,8 +34,8 @@ const exampleCVData = {
     {
       company: "Wolt",
       positionTitle: "Front-end Developer",
-      startJobDate: "10.2021",
-      endJobDate: "12.2023",
+      startJobDate: "2023-10",
+      endJobDate: "",
       jobLocation: "Tallinn, Estonia",
       description:
         "Developing new product features based on business requirements",
