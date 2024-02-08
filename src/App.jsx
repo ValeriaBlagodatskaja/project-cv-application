@@ -223,6 +223,11 @@ function App() {
                     onClick={() => {
                       setEducationVisible(true);
                       setSelectedSchool(null);
+                      setSchool("");
+                      setDegree("");
+                      setStartDate("");
+                      setEndDate("");
+                      setLocation("");
                     }}
                   >
                     Add education
@@ -318,6 +323,12 @@ function App() {
                     onClick={() => {
                       setExperienceVisible(true);
                       setSelectedCompany(null);
+                      setCompany("");
+                      setPositionTitle("");
+                      setStartJobDate("");
+                      setEndJobDate("");
+                      setJobLocation("");
+                      setDescription("");
                     }}
                   >
                     Add experience
