@@ -39,9 +39,14 @@ function App() {
     exampleCVData.experienceInfo
   );
 
+  const [selectedSchool, setSelectedSchool] = useState(null);
+
+  const [selectedCompany, setSelectedCompany] = useState(null);
+
   const showSchoolDetails = (schoolName) => {
     const foundSchool = educationInfo.find((edu) => edu.school === schoolName);
     if (foundSchool) {
+      setSelectedSchool(foundSchool);
       setSchool(foundSchool.school);
       setDegree(foundSchool.degree);
       setStartDate(foundSchool.startDate);
@@ -56,6 +61,7 @@ function App() {
       (exp) => exp.company === companyName
     );
     if (foundCompany) {
+      setSelectedCompany(foundCompany);
       setCompany(foundCompany.company);
       setPositionTitle(foundCompany.positionTitle);
       setStartJobDate(foundCompany.startJobDate);
@@ -87,6 +93,24 @@ function App() {
         description,
       };
       setExperienceInfo((prevData) => [...prevData, newData]);
+      setExperienceVisible(false);
+    }
+  };
+
+  const handleDelete = (category, selectedItem) => {
+    if (category === "education") {
+      const updatedEducationInfo = educationInfo.filter(
+        (edu) => edu.school !== selectedItem.school
+      );
+      setEducationInfo(updatedEducationInfo);
+      setSelectedSchool(null);
+      setEducationVisible(false);
+    } else if (category === "experience") {
+      const updatedExperienceInfo = experienceInfo.filter(
+        (exp) => exp.company !== selectedItem.company
+      );
+      setExperienceInfo(updatedExperienceInfo);
+      setSelectedCompany(null);
       setExperienceVisible(false);
     }
   };
@@ -179,7 +203,7 @@ function App() {
                   />
                   <div className="buttons-container">
                     <Button
-                      onClick={() => setEducationVisible(false)}
+                      onClick={() => handleDelete("education", selectedSchool)}
                       icon="trash"
                     >
                       Delete
@@ -215,6 +239,7 @@ function App() {
                     icon="+"
                     color="dark"
                     onClick={() => {
+                      setSelectedSchool(null);
                       setEducationVisible(true);
                       setSchool("");
                       setDegree("");
@@ -278,7 +303,9 @@ function App() {
                   />
                   <div className="buttons-container">
                     <Button
-                      onClick={() => setExperienceVisible(false)}
+                      onClick={() =>
+                        handleDelete("experience", selectedCompany)
+                      }
                       icon="trash"
                     >
                       Delete
@@ -314,6 +341,7 @@ function App() {
                     icon="+"
                     color="dark"
                     onClick={() => {
+                      setSelectedCompany(null);
                       setExperienceVisible(true);
                       setCompany("");
                       setPositionTitle("");
