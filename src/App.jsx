@@ -5,6 +5,7 @@ import Accordion from "./components/Accordion";
 import CV from "./components/CV";
 import "./App.css";
 import { useState } from "react";
+import exampleCVData from "../ExampleCVData";
 
 function App() {
   const [fullName, setFullName] = useState("Valeria Blagodatskaja");
@@ -12,23 +13,89 @@ function App() {
   const [phoneNumber, setPhoneNumber] = useState("+37255850441");
   const [address, setAddress] = useState("Tallinn, Estonia");
 
-  const [school, setSchool] = useState("");
-  const [degree, setDegree] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [location, setLocation] = useState("");
+  const [school, setSchool] = useState("Best School");
+  const [degree, setDegree] = useState("bakalaurus");
+  const [startDate, setStartDate] = useState("02.2023");
+  const [endDate, setEndDate] = useState("02.2024");
+  const [location, setLocation] = useState("Tallinn, Estonia");
 
-  const [company, setCompany] = useState("");
-  const [positionTitle, setPositionTitle] = useState("");
-  const [startJobDate, setStartJobDate] = useState("");
-  const [endJobDate, setEndJobDate] = useState("");
-  const [jobLocation, setJobLocation] = useState("");
-  const [description, setDescription] = useState("");
+  const [company, setCompany] = useState("Microsoft");
+  const [positionTitle, setPositionTitle] = useState("Front-end Developer");
+  const [startJobDate, setStartJobDate] = useState("06.2022");
+  const [endJobDate, setEndJobDate] = useState("01.2024");
+  const [jobLocation, setJobLocation] = useState("New York, USA");
+  const [description, setDescription] = useState(
+    "Developing new product features based on business requirements"
+  );
 
   const [educationVisible, setEducationVisible] = useState(false);
   const [experienceVisible, setExperienceVisible] = useState(false);
 
-  console.log(fullName, email, phoneNumber, address);
+  const [educationInfo, setEducationInfo] = useState(
+    exampleCVData.educationInfo
+  );
+
+  const [experienceInfo, setExperienceInfo] = useState(
+    exampleCVData.experienceInfo
+  );
+
+  const [selectedSchool, setSelectedSchool] = useState(null);
+
+  const showSchoolDetails = (schoolName) => {
+    const foundSchool = educationInfo.find((edu) => edu.school === schoolName);
+    if (foundSchool) {
+      setSelectedSchool(foundSchool);
+      setSchool(foundSchool.school);
+      setDegree(foundSchool.degree);
+      setStartDate(foundSchool.startDate);
+      setEndDate(foundSchool.endDate);
+      setLocation(foundSchool.location);
+      setEducationVisible(true);
+    }
+  };
+
+  const [selectedCompany, setSelectedCompany] = useState(null);
+
+  const showCompanyDetails = (companyName) => {
+    const foundCompany = experienceInfo.find(
+      (exp) => exp.company === companyName
+    );
+    if (foundCompany) {
+      setSelectedCompany(foundCompany);
+      setCompany(foundCompany.company);
+      setPositionTitle(foundCompany.positionTitle);
+      setStartJobDate(foundCompany.startJobDate);
+      setEndJobDate(foundCompany.endJobDate);
+      setJobLocation(foundCompany.jobLocation);
+      setDescription(foundCompany.description);
+      setExperienceVisible(true);
+    }
+  };
+
+  const handleSave = (category) => {
+    if (category === "education") {
+      const newData = {
+        school,
+        degree,
+        startDate,
+        endDate,
+        location,
+      };
+      setEducationInfo((prevData) => [...prevData, newData]);
+      setEducationVisible(false);
+    } else if (category === "experience") {
+      const newData = {
+        company,
+        positionTitle,
+        startJobDate,
+        endJobDate,
+        jobLocation,
+        description,
+      };
+      setExperienceInfo((prevData) => [...prevData, newData]);
+      setExperienceVisible(false);
+    }
+  };
 
   return (
     <div className="flex-col-gaps">
@@ -41,42 +108,8 @@ function App() {
               phoneNumber: phoneNumber,
               address: address,
             }}
-            educationInfo={[
-              {
-                school: "Best School",
-                degree: "bakalaurus",
-                startDate: "02.2023",
-                endDate: "01.2024",
-                location: "Tallinn, Estonia",
-              },
-              {
-                school: "Best School",
-                degree: "bakalaurus",
-                startDate: "02.2023",
-                endDate: "01.2024",
-                location: "Tallinn, Estonia",
-              },
-            ]}
-            experienceInfo={[
-              {
-                company: "Microsoft",
-                positionTitle: "Front-end Developer",
-                startJobDate: "02.2024",
-                endJobDate: "03.2025",
-                jobLocation: "New York, USA",
-                description:
-                  "Developing new product features based on business requirements",
-              },
-              {
-                company: "Microsoft",
-                positionTitle: "Front-end Developer",
-                startJobDate: "02.2024",
-                endJobDate: "03.2025",
-                jobLocation: "New York, USA",
-                description:
-                  "Developing new product features based on business requirements",
-              },
-            ]}
+            educationInfo={educationInfo}
+            experienceInfo={experienceInfo}
           />
         </div>
         <div className="edit-container">
@@ -161,22 +194,44 @@ function App() {
                       <Button onClick={() => setEducationVisible(false)}>
                         Cancel
                       </Button>
-                      <Button color="dark">Save</Button>
+                      <Button
+                        onClick={() => handleSave("education")}
+                        color="dark"
+                      >
+                        Save
+                      </Button>
                     </div>
                   </div>
                 </>
               )}
               {!educationVisible && (
-                <Button
-                  icon="+"
-                  color="dark"
-                  onClick={() => setEducationVisible(true)}
-                >
-                  Add education
-                </Button>
+                <div className="education-buttons-container">
+                  <div className="school-buttons-container">
+                    {educationInfo.map(({ school }) => (
+                      <Button
+                        className="button school-button"
+                        key={school}
+                        onClick={() => showSchoolDetails(school)}
+                      >
+                        {school}
+                      </Button>
+                    ))}
+                  </div>
+                  <Button
+                    icon="+"
+                    color="dark"
+                    onClick={() => {
+                      setEducationVisible(true);
+                      setSelectedSchool(null);
+                    }}
+                  >
+                    Add education
+                  </Button>
+                </div>
               )}
             </Accordion>
           </Card>
+
           <Card>
             <Accordion title="Experience">
               {experienceVisible && (
@@ -234,19 +289,40 @@ function App() {
                       <Button onClick={() => setExperienceVisible(false)}>
                         Cancel
                       </Button>
-                      <Button color="dark">Save</Button>
+                      <Button
+                        onClick={() => handleSave("experience")}
+                        color="dark"
+                      >
+                        Save
+                      </Button>
                     </div>
                   </div>
                 </>
               )}
               {!experienceVisible && (
-                <Button
-                  icon="+"
-                  color="dark"
-                  onClick={() => setExperienceVisible(true)}
-                >
-                  Add experience
-                </Button>
+                <div className="experience-buttons-container">
+                  <div className="company-buttons-container">
+                    {experienceInfo.map(({ company }) => (
+                      <Button
+                        className="button company-button"
+                        key={company}
+                        onClick={() => showCompanyDetails(company)}
+                      >
+                        {company}
+                      </Button>
+                    ))}
+                  </div>
+                  <Button
+                    icon="+"
+                    color="dark"
+                    onClick={() => {
+                      setExperienceVisible(true);
+                      setSelectedCompany(null);
+                    }}
+                  >
+                    Add experience
+                  </Button>
+                </div>
               )}
             </Accordion>
           </Card>
