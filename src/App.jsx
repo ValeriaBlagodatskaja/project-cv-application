@@ -39,12 +39,9 @@ function App() {
     exampleCVData.experienceInfo
   );
 
-  const [selectedSchool, setSelectedSchool] = useState(null);
-
   const showSchoolDetails = (schoolName) => {
     const foundSchool = educationInfo.find((edu) => edu.school === schoolName);
     if (foundSchool) {
-      setSelectedSchool(foundSchool);
       setSchool(foundSchool.school);
       setDegree(foundSchool.degree);
       setStartDate(foundSchool.startDate);
@@ -54,14 +51,11 @@ function App() {
     }
   };
 
-  const [selectedCompany, setSelectedCompany] = useState(null);
-
   const showCompanyDetails = (companyName) => {
     const foundCompany = experienceInfo.find(
       (exp) => exp.company === companyName
     );
     if (foundCompany) {
-      setSelectedCompany(foundCompany);
       setCompany(foundCompany.company);
       setPositionTitle(foundCompany.positionTitle);
       setStartJobDate(foundCompany.startJobDate);
@@ -222,7 +216,6 @@ function App() {
                     color="dark"
                     onClick={() => {
                       setEducationVisible(true);
-                      setSelectedSchool(null);
                       setSchool("");
                       setDegree("");
                       setStartDate("");
@@ -322,7 +315,6 @@ function App() {
                     color="dark"
                     onClick={() => {
                       setExperienceVisible(true);
-                      setSelectedCompany(null);
                       setCompany("");
                       setPositionTitle("");
                       setStartJobDate("");
