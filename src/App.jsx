@@ -1,11 +1,10 @@
-import Card from "./components/Card";
-import Button from "./components/Button";
-import Input from "./components/Input";
-import Accordion from "./components/Accordion";
-import CV from "./components/CV";
+import CV from "./components/CV/CV";
 import "./App.css";
 import { useState } from "react";
 import exampleCVData from "../ExampleCVData";
+import PersonalInfoCard from "./components/PersonalInfoCard";
+import EducationInfoCard from "./components/EducationInfoCard";
+import ExperienceInfoCard from "./components/ExperienceInfoCard";
 
 function App() {
   const [fullName, setFullName] = useState("Valeria Blagodatskaja");
@@ -22,7 +21,7 @@ function App() {
   const [company, setCompany] = useState("Microsoft");
   const [positionTitle, setPositionTitle] = useState("Front-end Developer");
   const [startJobDate, setStartJobDate] = useState("2021-07");
-  const [endJobDate, setEndJobDate] = useState("2023-10");
+  const [endJobDate, setEndJobDate] = useState("");
   const [jobLocation, setJobLocation] = useState("New York, USA");
   const [description, setDescription] = useState(
     "Developing new product features based on business requirements"
@@ -165,233 +164,60 @@ function App() {
             experienceInfo={experienceInfo}
           />
         </div>
-        <div className="edit-container">
-          <Card>
-            <h3 className="title">Personal information</h3>
-            <Input
-              label="Full name"
-              type="text"
-              placeholder="John Doe"
-              setValue={setFullName}
-              value={fullName}
-            />
-            <Input
-              label="Email"
-              type="email"
-              placeholder="john.doe@gmail.com"
-              setValue={setEmail}
-              value={email}
-            />
-            <Input
-              label="Phone number"
-              type="tel"
-              placeholder="+37256862022"
-              setValue={setPhoneNumber}
-              value={phoneNumber}
-            />
-            <Input
-              label="Address"
-              type="text"
-              placeholder="Tallinn, Estonia"
-              setValue={setAddress}
-              value={address}
-            />
-          </Card>
-          <Card>
-            <Accordion title="Education">
-              {educationVisible && (
-                <>
-                  <Input
-                    label="School"
-                    type="text"
-                    placeholder="School Name"
-                    setValue={setSchool}
-                    value={school}
-                  />
-                  <Input
-                    label="Degree"
-                    type="text"
-                    placeholder="Degree"
-                    setValue={setDegree}
-                    value={degree}
-                  />
-                  <Input
-                    label="Start Date"
-                    type="month"
-                    placeholder="Start Date"
-                    setValue={setStartDate}
-                    value={startDate}
-                  />
-                  <Input
-                    label="End Date"
-                    type="month"
-                    placeholder="End Date"
-                    setValue={setEndDate}
-                    value={endDate}
-                  />
-                  <Input
-                    label="Location"
-                    type="text"
-                    placeholder="Location"
-                    setValue={setLocation}
-                    value={location}
-                  />
-                  <div className="buttons-container">
-                    <Button
-                      onClick={() => handleDelete("education", selectedSchool)}
-                      icon="trash"
-                    >
-                      Delete
-                    </Button>
-                    <div className="cancel-save-container">
-                      <Button onClick={() => setEducationVisible(false)}>
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={() => handleSave("education")}
-                        color="dark"
-                      >
-                        Save
-                      </Button>
-                    </div>
-                  </div>
-                </>
-              )}
-              {!educationVisible && (
-                <div className="education-buttons-container">
-                  <div className="school-buttons-container">
-                    {educationInfo.map(({ school }) => (
-                      <Button
-                        className="button school-button"
-                        key={school}
-                        onClick={() => showSchoolDetails(school)}
-                      >
-                        {school}
-                      </Button>
-                    ))}
-                  </div>
-                  <Button
-                    icon="+"
-                    color="dark"
-                    onClick={() => {
-                      setSelectedSchool(null);
-                      setEducationVisible(true);
-                      setSchool("");
-                      setDegree("");
-                      setStartDate("");
-                      setEndDate("");
-                      setLocation("");
-                    }}
-                  >
-                    Add education
-                  </Button>
-                </div>
-              )}
-            </Accordion>
-          </Card>
 
-          <Card>
-            <Accordion title="Experience">
-              {experienceVisible && (
-                <>
-                  <Input
-                    label="Company"
-                    type="text"
-                    placeholder="Company Name"
-                    setValue={setCompany}
-                    value={company}
-                  />
-                  <Input
-                    label="Position Title"
-                    type="text"
-                    placeholder="Position Title"
-                    setValue={setPositionTitle}
-                    value={positionTitle}
-                  />
-                  <Input
-                    label="Start Date"
-                    type="month"
-                    placeholder="Start Date"
-                    setValue={setStartJobDate}
-                    value={startJobDate}
-                  />
-                  <Input
-                    label="End Date"
-                    type="month"
-                    placeholder="End Date"
-                    setValue={setEndJobDate}
-                    value={endJobDate}
-                  />
-                  <Input
-                    label="Location"
-                    type="text"
-                    placeholder="Location"
-                    setValue={setJobLocation}
-                    value={jobLocation}
-                  />
-                  <Input
-                    label="Description"
-                    type="text"
-                    placeholder="Description"
-                    setValue={setDescription}
-                    value={description}
-                  />
-                  <div className="buttons-container">
-                    <Button
-                      onClick={() =>
-                        handleDelete("experience", selectedCompany)
-                      }
-                      icon="trash"
-                    >
-                      Delete
-                    </Button>
-                    <div className="cancel-save-container">
-                      <Button onClick={() => setExperienceVisible(false)}>
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={() => handleSave("experience")}
-                        color="dark"
-                      >
-                        Save
-                      </Button>
-                    </div>
-                  </div>
-                </>
-              )}
-              {!experienceVisible && (
-                <div className="experience-buttons-container">
-                  <div className="company-buttons-container">
-                    {experienceInfo.map(({ company }) => (
-                      <Button
-                        className="button company-button"
-                        key={company}
-                        onClick={() => showCompanyDetails(company)}
-                      >
-                        {company}
-                      </Button>
-                    ))}
-                  </div>
-                  <Button
-                    icon="+"
-                    color="dark"
-                    onClick={() => {
-                      setSelectedCompany(null);
-                      setExperienceVisible(true);
-                      setCompany("");
-                      setPositionTitle("");
-                      setStartJobDate("");
-                      setEndJobDate("");
-                      setJobLocation("");
-                      setDescription("");
-                    }}
-                  >
-                    Add experience
-                  </Button>
-                </div>
-              )}
-            </Accordion>
-          </Card>
+        <div className="edit-container">
+          <PersonalInfoCard
+            fullName={fullName}
+            setFullName={setFullName}
+            email={email}
+            setEmail={setEmail}
+            phoneNumber={phoneNumber}
+            setPhoneNumber={setPhoneNumber}
+            address={address}
+            setAddress={setAddress}
+          />
+          <EducationInfoCard
+            school={school}
+            setSchool={setSchool}
+            degree={degree}
+            setDegree={setDegree}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            location={location}
+            setLocation={setLocation}
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedSchool={selectedSchool}
+            setSelectedSchool={setSelectedSchool}
+            educationVisible={educationVisible}
+            setEducationVisible={setEducationVisible}
+            showSchoolDetails={showSchoolDetails}
+            educationInfo={educationInfo}
+          />
+          <ExperienceInfoCard
+            company={company}
+            setCompany={setCompany}
+            positionTitle={positionTitle}
+            setPositionTitle={setPositionTitle}
+            startJobDate={startJobDate}
+            setStartJobDate={setStartJobDate}
+            endJobDate={endJobDate}
+            setEndJobDate={setEndJobDate}
+            jobLocation={jobLocation}
+            setJobLocation={setJobLocation}
+            description={description}
+            setDescription={setDescription}
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedCompany={selectedCompany}
+            setSelectedCompany={setSelectedCompany}
+            experienceVisible={experienceVisible}
+            setExperienceVisible={setExperienceVisible}
+            showCompanyDetails={showCompanyDetails}
+            experienceInfo={experienceInfo}
+          />
         </div>
       </div>
     </div>

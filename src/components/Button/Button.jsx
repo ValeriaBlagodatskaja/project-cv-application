@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import "./Button.css";
-import Plus from "../assets/plus.svg?react";
-import Trash from "../assets/trash.svg?react";
+import Plus from "../../assets/plus.svg?react";
+import Trash from "../../assets/trash.svg?react";
 
 export default function Button({ children, className, icon, color, onClick }) {
   return (

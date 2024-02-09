@@ -1,7 +1,7 @@
 import "./CV.css";
-import Message from "../assets/message.svg?react";
-import Phone from "../assets/phone.svg?react";
-import Location from "../assets/location.svg?react";
+import Message from "../../assets/message.svg?react";
+import Phone from "../../assets/phone.svg?react";
+import Location from "../../assets/location.svg?react";
 
 export default function CV({ personalInfo, educationInfo, experienceInfo }) {
   const hasSchoolButtons = educationInfo.length > 0;
