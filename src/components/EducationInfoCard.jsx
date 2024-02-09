@@ -98,16 +98,6 @@ function EducationInfoCard({
               icon="+"
               color="dark"
               onClick={() => {
-                console.log("Before setting state:", {
-                  selectedSchool,
-                  educationVisible,
-                  school,
-                  degree,
-                  startDate,
-                  endDate,
-                  location,
-                });
-
                 setSelectedSchool(null);
                 setEducationVisible(true);
                 setSchool("");
@@ -115,16 +105,6 @@ function EducationInfoCard({
                 setStartDate("");
                 setEndDate("");
                 setLocation("");
-
-                console.log("After setting state:", {
-                  selectedSchool,
-                  educationVisible,
-                  school,
-                  degree,
-                  startDate,
-                  endDate,
-                  location,
-                });
               }}
             >
               Add education
