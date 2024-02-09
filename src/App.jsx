@@ -12,19 +12,19 @@ function App() {
   const [phoneNumber, setPhoneNumber] = useState("+37255850441");
   const [address, setAddress] = useState("Tallinn, Estonia");
 
-  const [school, setSchool] = useState("Best School");
-  const [degree, setDegree] = useState("bakalaurus");
-  const [startDate, setStartDate] = useState("2018-05");
-  const [endDate, setEndDate] = useState("2020-11");
+  const [school, setSchool] = useState("Tallinn University of Technolgy");
+  const [degree, setDegree] = useState("Bachelor of information technology");
+  const [startDate, setStartDate] = useState("2019-09");
+  const [endDate, setEndDate] = useState("2022-06");
   const [location, setLocation] = useState("Tallinn, Estonia");
 
-  const [company, setCompany] = useState("Microsoft");
-  const [positionTitle, setPositionTitle] = useState("Front-end Developer");
+  const [company, setCompany] = useState("Umbrella Inc.");
+  const [positionTitle, setPositionTitle] = useState("UX & UI Designer");
   const [startJobDate, setStartJobDate] = useState("2021-07");
   const [endJobDate, setEndJobDate] = useState("");
   const [jobLocation, setJobLocation] = useState("New York, USA");
   const [description, setDescription] = useState(
-    "Developing new product features based on business requirements"
+    "Designed and prototyped user interface patterns for various clients in various industries, ranging from self-service apps within the telecommunications-sector to mobile games for IOS and Android"
   );
 
   const [educationVisible, setEducationVisible] = useState(false);
