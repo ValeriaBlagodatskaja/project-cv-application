@@ -1,9 +1,19 @@
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import clsx from "clsx";
 import "./Accordion.css";
 
-export default function Accordion({ title, className, children }) {
+interface AccordionProps {
+  title: string;
+  className?: string;
+  children?: ReactNode;
+}
+
+export default function Accordion({
+  title,
+  className,
+  children,
+}: AccordionProps) {
   const [open, setOpen] = useState(false);
 
   return (
