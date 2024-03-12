@@ -6,7 +6,7 @@ import "./Accordion.css";
 interface AccordionProps {
   title: string;
   className?: string;
-  children?: ReactNode;
+  children: ReactNode;
 }
 
 export default function Accordion({

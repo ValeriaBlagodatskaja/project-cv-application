@@ -3,7 +3,39 @@ import Message from "../../assets/message.svg?react";
 import Phone from "../../assets/phone.svg?react";
 import Location from "../../assets/location.svg?react";
 
-export default function CV({ personalInfo, educationInfo, experienceInfo }) {
+interface CVprops {
+  personalInfo: {
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    address: string;
+  };
+  educationInfo: EducationInfoProps[];
+  experienceInfo: ExperienceInfoProps[];
+}
+
+export interface EducationInfoProps {
+  school: string;
+  degree: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+}
+
+export interface ExperienceInfoProps {
+  company: string;
+  positionTitle: string;
+  startJobDate: string;
+  endJobDate: string;
+  jobLocation: string;
+  description: string;
+}
+
+export default function CV({
+  personalInfo,
+  educationInfo,
+  experienceInfo,
+}: CVprops) {
   const hasSchoolButtons = educationInfo.length > 0;
   const hasCompanyButtons = experienceInfo.length > 0;
 
@@ -34,7 +66,13 @@ export default function CV({ personalInfo, educationInfo, experienceInfo }) {
 
             {educationInfo &&
               educationInfo.map(
-                ({ school, degree, startDate, endDate, location }) => {
+                ({
+                  school,
+                  degree,
+                  startDate,
+                  endDate,
+                  location,
+                }: EducationInfoProps) => {
                   return (
                     <div key={startDate + endDate}>
                       <div className="school-details-container">
@@ -71,7 +109,7 @@ export default function CV({ personalInfo, educationInfo, experienceInfo }) {
                   endJobDate,
                   jobLocation,
                   description,
-                }) => {
+                }: ExperienceInfoProps) => {
                   return (
                     <div key={company + positionTitle}>
                       <div className="job-details-container">

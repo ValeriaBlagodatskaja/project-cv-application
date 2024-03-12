@@ -2,6 +2,27 @@ import Card from "./Card/Card";
 import Input from "./Input/Input";
 import Button from "./Button/Button";
 import Accordion from "./Accordion/Accordion";
+import { ExperienceInfoProps } from "./CV/CV";
+import { ExperienceInfo } from "../../ExampleCVData";
+
+interface ExperienceInfoCardProps extends ExperienceInfoProps {
+  setCompany: React.Dispatch<React.SetStateAction<string>>;
+  setPositionTitle: React.Dispatch<React.SetStateAction<string>>;
+  setStartJobDate: React.Dispatch<React.SetStateAction<string>>;
+  setEndJobDate: React.Dispatch<React.SetStateAction<string>>;
+  setJobLocation: React.Dispatch<React.SetStateAction<string>>;
+  setDescription: React.Dispatch<React.SetStateAction<string>>;
+  handleSave: (type: string) => void;
+  handleDelete: (type: string, selectedCompany: ExperienceInfo | null) => void;
+  selectedCompany: ExperienceInfo | null;
+  setSelectedCompany?: React.Dispatch<
+    React.SetStateAction<ExperienceInfo | null>
+  >;
+  experienceVisible: boolean;
+  setExperienceVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  showCompanyDetails: (school: string) => void;
+  experienceInfo: ExperienceInfoProps[];
+}
 
 function ExperienceInfoCard({
   company,
@@ -24,7 +45,7 @@ function ExperienceInfoCard({
   setExperienceVisible,
   showCompanyDetails,
   experienceInfo,
-}) {
+}: ExperienceInfoCardProps) {
   return (
     <Card>
       <Accordion title="Experience">
@@ -36,6 +57,7 @@ function ExperienceInfoCard({
               placeholder="Company Name"
               setValue={setCompany}
               value={company}
+              className="input"
             />
             <Input
               label="Position Title"
@@ -43,6 +65,7 @@ function ExperienceInfoCard({
               placeholder="Position Title"
               setValue={setPositionTitle}
               value={positionTitle}
+              className="input"
             />
             <Input
               label="Start Date"
@@ -50,6 +73,7 @@ function ExperienceInfoCard({
               placeholder="Start Date"
               setValue={setStartJobDate}
               value={startJobDate}
+              className="input"
             />
             <Input
               label="End Date"
@@ -57,6 +81,7 @@ function ExperienceInfoCard({
               placeholder="End Date"
               setValue={setEndJobDate}
               value={endJobDate}
+              className="input"
             />
             <Input
               label="Location"
@@ -64,6 +89,7 @@ function ExperienceInfoCard({
               placeholder="Location"
               setValue={setJobLocation}
               value={jobLocation}
+              className="input"
             />
             <Input
               label="Description"
@@ -71,6 +97,7 @@ function ExperienceInfoCard({
               placeholder="Description"
               setValue={setDescription}
               value={description}
+              className="input"
             />
             <div className="buttons-container">
               <Button
@@ -107,7 +134,9 @@ function ExperienceInfoCard({
               icon="+"
               color="dark"
               onClick={() => {
-                setSelectedCompany(null);
+                if (setSelectedCompany) {
+                  setSelectedCompany(null);
+                }
                 setExperienceVisible(true);
                 setCompany("");
                 setPositionTitle("");

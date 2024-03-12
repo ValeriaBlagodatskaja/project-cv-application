@@ -2,6 +2,26 @@ import Card from "./Card/Card";
 import Input from "./Input/Input";
 import Button from "./Button/Button";
 import Accordion from "./Accordion/Accordion";
+import { EducationInfoProps } from "./CV/CV";
+import { EducationInfo } from "../../ExampleCVData";
+
+interface EducationInfoCardProps extends EducationInfoProps {
+  setSchool: React.Dispatch<React.SetStateAction<string>>;
+  setDegree: React.Dispatch<React.SetStateAction<string>>;
+  setStartDate: React.Dispatch<React.SetStateAction<string>>;
+  setEndDate: React.Dispatch<React.SetStateAction<string>>;
+  setLocation: React.Dispatch<React.SetStateAction<string>>;
+  handleSave: (type: string) => void;
+  handleDelete: (type: string, selectedSchool: EducationInfo | null) => void;
+  selectedSchool: EducationInfo | null;
+  setSelectedSchool?: React.Dispatch<
+    React.SetStateAction<EducationInfo | null>
+  >;
+  educationVisible: boolean;
+  setEducationVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  showSchoolDetails: (school: string) => void;
+  educationInfo: EducationInfoProps[];
+}
 
 function EducationInfoCard({
   school,
@@ -22,7 +42,7 @@ function EducationInfoCard({
   setEducationVisible,
   showSchoolDetails,
   educationInfo,
-}) {
+}: EducationInfoCardProps) {
   return (
     <Card>
       <Accordion title="Education">
@@ -34,6 +54,7 @@ function EducationInfoCard({
               placeholder="School Name"
               setValue={setSchool}
               value={school}
+              className="input"
             />
             <Input
               label="Degree"
@@ -41,6 +62,7 @@ function EducationInfoCard({
               placeholder="Degree"
               setValue={setDegree}
               value={degree}
+              className="input"
             />
             <Input
               label="Start Date"
@@ -48,6 +70,7 @@ function EducationInfoCard({
               placeholder="Start Date"
               setValue={setStartDate}
               value={startDate}
+              className="input"
             />
             <Input
               label="End Date"
@@ -55,6 +78,7 @@ function EducationInfoCard({
               placeholder="End Date"
               setValue={setEndDate}
               value={endDate}
+              className="input"
             />
             <Input
               label="Location"
@@ -62,6 +86,7 @@ function EducationInfoCard({
               placeholder="Location"
               setValue={setLocation}
               value={location}
+              className="input"
             />
             <div className="buttons-container">
               <Button
@@ -98,7 +123,9 @@ function EducationInfoCard({
               icon="+"
               color="dark"
               onClick={() => {
-                setSelectedSchool(null);
+                if (setSelectedSchool) {
+                  setSelectedSchool(null);
+                }
                 setEducationVisible(true);
                 setSchool("");
                 setDegree("");

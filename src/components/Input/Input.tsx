@@ -1,6 +1,15 @@
 import clsx from "clsx";
 import "./Input.css";
 
+export interface InputProps {
+  className: string;
+  label: string;
+  type: "text" | "tel" | "email" | "month";
+  placeholder: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
 export default function Input({
   className,
   label,
@@ -8,8 +17,8 @@ export default function Input({
   placeholder,
   value,
   setValue,
-}) {
-  const handleInputChange = (e) => {
+}: InputProps) {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (type === "tel") {
       const numericValue = e.target.value.replace(/[^0-9+]/g, "");
       setValue(numericValue);

@@ -1,7 +1,7 @@
 import CV from "./components/CV/CV";
 import "./App.css";
 import { useState } from "react";
-import exampleCVData from "../ExampleCVData";
+import exampleCVData, { EducationInfo, ExperienceInfo } from "../ExampleCVData";
 import PersonalInfoCard from "./components/PersonalInfoCard";
 import EducationInfoCard from "./components/EducationInfoCard";
 import ExperienceInfoCard from "./components/ExperienceInfoCard";
@@ -38,9 +38,13 @@ function App() {
     exampleCVData.experienceInfo
   );
 
-  const [selectedSchool, setSelectedSchool] = useState(null);
+  const [selectedSchool, setSelectedSchool] = useState<EducationInfo | null>(
+    null
+  );
 
-  const [selectedCompany, setSelectedCompany] = useState(null);
+  const [selectedCompany, setSelectedCompany] = useState<ExperienceInfo | null>(
+    null
+  );
 
   const [schoolButtons, setSchoolButtons] = useState(
     educationInfo.map((education) => education.school)
@@ -50,10 +54,12 @@ function App() {
     experienceInfo.map((experience) => experience.company)
   );
 
-  const showSchoolDetails = (schoolName) => {
+  const showSchoolDetails = (schoolName: string) => {
     const foundSchool = educationInfo.find(
       (education) => education.school === schoolName
     );
+    console.log(foundSchool);
+    console.log(selectedSchool);
     if (foundSchool) {
       setSelectedSchool(foundSchool);
       setSchool(foundSchool.school);
@@ -65,7 +71,7 @@ function App() {
     }
   };
 
-  const showCompanyDetails = (companyName) => {
+  const showCompanyDetails = (companyName: string) => {
     const foundCompany = experienceInfo.find(
       (experience) => experience.company === companyName
     );
@@ -81,7 +87,7 @@ function App() {
     }
   };
 
-  const handleSave = (category) => {
+  const handleSave = (category: string) => {
     if (category === "education") {
       const newData = {
         school,
@@ -131,17 +137,22 @@ function App() {
     }
   };
 
-  const handleDelete = (category, selectedItem) => {
+  const handleDelete = (
+    category: string,
+    selectedItem: EducationInfo | ExperienceInfo | null
+  ) => {
     if (category === "education") {
+      const educationItem = selectedItem as EducationInfo;
       const updatedEducationInfo = educationInfo.filter(
-        (education) => education.school !== selectedItem.school
+        (education) => education.school !== educationItem?.school
       );
       setEducationInfo(updatedEducationInfo);
       setSelectedSchool(null);
       setEducationVisible(false);
     } else if (category === "experience") {
+      const experienceItem = selectedItem as ExperienceInfo;
       const updatedExperienceInfo = experienceInfo.filter(
-        (exp) => exp.company !== selectedItem.company
+        (exp) => exp.company !== experienceItem?.company
       );
       setExperienceInfo(updatedExperienceInfo);
       setSelectedCompany(null);

@@ -1,4 +1,34 @@
-const exampleCVData = {
+export interface EducationInfo {
+  school: string;
+  degree: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+}
+
+export interface ExperienceInfo {
+  company: string;
+  positionTitle: string;
+  startJobDate: string;
+  endJobDate: string;
+  jobLocation: string;
+  description: string;
+}
+
+export interface PersonalInfo {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+}
+
+export interface ExampleCVData {
+  personalInfo: PersonalInfo;
+  educationInfo: EducationInfo[];
+  experienceInfo: ExperienceInfo[];
+}
+
+const exampleCVData: ExampleCVData = {
   personalInfo: {
     fullName: "Valeria Blagodatskaja",
     email: "valeria@gmail.com",
